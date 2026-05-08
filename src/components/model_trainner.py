@@ -48,11 +48,57 @@ class ModelTrainer:
                 "K-Neighbors Regressor": KNeighborsRegressor(),
                 "XGBRegressor": XGBRegressor(),
                 "CatBoosting Regressor": CatBoostRegressor(verbose=False),
-                "AdaBoost Classifier": AdaBoostRegressor(),
+                "AdaBoost Regressor": AdaBoostRegressor(),
+            }
+
+            params = {
+                "Decision Tree": {
+                    "criterion": ["squared_error", "friedman_mse", "absolute_error"],
+                    #"splitter": ["best", "random"],
+                    #"max_depth": [5, 10, 15, None]
+                },
+
+                "Random Forest": {
+                    "n_estimators": [50, 100, 200],
+                    #"max_depth": [5, 10, 15, None],
+                    #"min_samples_split": [2, 5, 10]
+                },
+
+                "Gradient Boosting": {
+                    "n_estimators": [50, 100, 200],
+                    #"learning_rate": [0.01, 0.05, 0.1],
+                    #"max_depth": [3, 5, 8]
+                },
+
+                "Linear Regression": {},
+
+                "K-Neighbors Regressor": {
+                    "n_neighbors": [3, 5, 7, 9],
+                    #"weights": ["uniform", "distance"]
+                },
+
+                "XGBRegressor": {
+                    "n_estimators": [50, 100, 200],
+                    #"learning_rate": [0.01, 0.05, 0.1],
+                    #"max_depth": [3, 5, 8]
+                },
+
+                "CatBoosting Regressor": {
+                    "iterations": [100, 200],
+                    #"learning_rate": [0.01, 0.05, 0.1],
+                    #"depth": [4, 6, 8]
+                },
+
+                    
+
+                "AdaBoost Regressor": {
+                    #"n_estimators": [50, 100, 200],
+                    #"learning_rate": [0.01, 0.05, 0.1]
+                }
             }
 
             model_report: dict = evaluate_model(X_train=X_train, y_train=y_train,
-                                                    X_test=X_test, y_test=y_test, models=models)
+                                                    X_test=X_test, y_test=y_test, models=models,param = params)
 
             
             # to get the best model score from dict
